@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teemu — Personal Trainer & Jääkiekkovalmentaja Helsinki</title>
+<meta name="description" content="Ammattitutkinnon suorittanut personal trainer ja jääkiekkovalmentaja Helsingissä.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#0A0A0A;
+  color:#fff;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+:root{
+  --y:#E8FF00;
+  --bg:#0A0A0A;
+  --dim:rgba(255,255,255,0.55);
+  --sec-pad:120px 8vw;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+input,textarea,select,button{font-family:inherit}
+
+/* ── SCROLL ANIMATIONS ──────────────────────────────── */
+.anim{opacity:0;transform:translateY(50px);transition:opacity .8s ease,transform .8s ease}
+.anim.vis{opacity:1;transform:translateY(0)}
+
+.anim-left{opacity:0;transform:translateX(-52px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.anim-left.vis{opacity:1;transform:translateX(0)}
+
+.anim-right{opacity:0;transform:translateX(52px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.anim-right.vis{opacity:1;transform:translateX(0)}
+
+.anim-scale{opacity:0;transform:scale(.93);transition:opacity .75s ease,transform .75s cubic-bezier(.34,1.4,.64,1)}
+.anim-scale.vis{opacity:1;transform:scale(1)}
+
+.anim-line{opacity:0;transform:scaleX(0);transform-origin:left center;transition:opacity .5s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.anim-line.vis{opacity:1;transform:scaleX(1)}
+
+/* delay utilities — work with all anim variants */
+.d1{transition-delay:.1s}
+.d2{transition-delay:.2s}
+.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}
+
+/* ── BUTTONS ────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:18px 40px;border-radius:50px;
+  font-size:1rem;font-weight:700;cursor:pointer;
+  transition:all .25s ease;border:none;letter-spacing:.02em;
+}
+.btn-y{background:var(--y);color:#0A0A0A}
+.btn-y:hover{background:#fff;transform:translateY(-2px)}
+.btn-out{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.35)}
+.btn-out:hover{border-color:var(--y);color:var(--y);transform:translateY(-2px)}
+.btn-out-y{background:transparent;color:var(--y);border:1.5px solid var(--y)}
+.btn-out-y:hover{background:var(--y);color:#0A0A0A;transform:translateY(-2px)}
+
+/* ── EYEBROW ────────────────────────────────────────── */
+.eyebrow{
+  display:inline-block;color:var(--y);
+  font-size:.72rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;margin-bottom:1.2rem;
+}
+
+/* ── SECTION HEADINGS ───────────────────────────────── */
+.section-title{
+  font-size:clamp(48px,8vw,100px);
+  font-weight:800;line-height:1;
+  letter-spacing:-.03em;margin-bottom:0;
+}
+
+/* ── NAV ────────────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:24px 8vw;
+  transition:background .3s,backdrop-filter .3s,padding .3s;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:32px}
+.nav-logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.05rem;letter-spacing:.1em}
+.logo-dot{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--y);color:#0A0A0A;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.95rem;flex-shrink:0;
+}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{color:var(--dim);font-size:.88rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+#nav .btn{padding:12px 24px;font-size:.85rem}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mob-menu{
+  display:none;position:fixed;inset:0;
+  background:rgba(10,10,10,.97);backdrop-filter:blur(20px);
+  z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:36px;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{font-size:1.8rem;font-weight:700;color:#fff;transition:color .2s}
+.mob-menu a:hover{color:var(--y)}
+
+/* ── S1 HERO ────────────────────────────────────────── */
+#hero{position:relative;height:100vh;min-height:600px;overflow:hidden}
+#hero video{will-change:transform}
+.hero-content{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 8vw;
+}
+.hero-badge{
+  display:inline-block;
+  border:1px solid rgba(255,255,255,.4);
+  color:rgba(255,255,255,.85);
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  padding:7px 18px;border-radius:50px;margin-bottom:20px;
+  backdrop-filter:blur(6px);background:rgba(255,255,255,.05);
+}
+.hero-eyebrow{
+  color:var(--y);font-size:clamp(.85rem,1.5vw,1.1rem);
+  font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.hero-name{
+  font-size:clamp(80px,15vw,180px);font-weight:800;
+  line-height:.92;color:#fff;letter-spacing:-.04em;
+  margin-bottom:20px;
+}
+.hero-sub{
+  color:var(--y);font-size:clamp(.85rem,1.4vw,1rem);
+  font-weight:600;margin-bottom:32px;opacity:.9;max-width:500px;
+  line-height:1.6;
+}
+.hero-stats{
+  display:flex;align-items:center;gap:40px;
+  margin-bottom:40px;
+}
+.hstat{display:flex;flex-direction:column;align-items:center}
+.hstat-n{font-size:1.5rem;font-weight:800;color:#fff}
+.hstat-l{font-size:.75rem;color:var(--dim);letter-spacing:.05em;margin-top:2px}
+.hstat-div{width:1px;height:36px;background:rgba(255,255,255,.2)}
+
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:rgba(255,255,255,.4);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+}
+.scroll-line{
+  width:1px;height:40px;background:rgba(255,255,255,.25);
+  animation:scrollLine 1.8s ease-in-out infinite;
+  transform-origin:top;
+}
+@keyframes scrollLine{
+  0%{transform:scaleY(0);opacity:0;transform-origin:top}
+  50%{transform:scaleY(1);opacity:1;transform-origin:top}
+  100%{transform:scaleY(0);opacity:0;transform-origin:bottom}
+}
+
+/* ── S2 HOOK ────────────────────────────────────────── */
+#hook{
+  padding:var(--sec-pad);
+  background:#0A0A0A;
+}
+.hook-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+.hook-heading{
+  font-size:clamp(36px,5vw,64px);font-weight:800;
+  line-height:1.1;letter-spacing:-.03em;margin-bottom:28px;
+}
+.hook-body{color:var(--dim);font-size:1.05rem;line-height:1.85;margin-bottom:32px;max-width:480px}
+.hook-pills{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.pill{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.7);
+  font-size:.78rem;font-weight:600;
+  padding:8px 20px;border-radius:50px;letter-spacing:.04em;
+}
+.hook-img{
+  height:520px;border-radius:16px;overflow:hidden;position:relative;
+}
+.hook-img img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;transition:transform .6s ease;
+}
+.hook-img:hover img{transform:scale(1.03)}
+
+/* ── S3 SERVICES ────────────────────────────────────── */
+#services{
+  position:relative;
+  background-image:url("https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
+#services::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.82);
+  z-index:0;
+}
+#services>div{position:relative;z-index:1;padding:var(--sec-pad)}
+.svc-header{margin-bottom:64px}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.svc-item{
+  padding:48px 40px;
+  border-top:2px solid var(--y);
+  transition:background .25s;
+}
+.svc-item:nth-child(even){border-left:1px solid rgba(255,255,255,.06)}
+.svc-item:hover{background:rgba(255,255,255,.025)}
+.svc-num{
+  font-size:.72rem;font-weight:800;color:var(--y);
+  letter-spacing:.18em;margin-bottom:16px;display:block;
+}
+.svc-title{
+  font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:800;
+  color:#fff;margin-bottom:12px;
+  transition:color .2s;letter-spacing:-.02em;
+}
+.svc-item:hover .svc-title{color:var(--y)}
+.svc-desc{color:var(--dim);font-size:.95rem;line-height:1.75;max-width:380px}
+
+/* ── S4 PROCESS ─────────────────────────────────────── */
+#process{
+  position:relative;padding:var(--sec-pad);overflow:hidden;
+}
+.process-bg{
+  position:absolute;inset:0;
+  background:url('https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750') center/cover no-repeat;
+  z-index:0;
+}
+.process-ov{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.8);
+  z-index:1;
+}
+.process-inner{position:relative;z-index:2}
+.process-header{margin-bottom:64px}
+.steps-row{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;margin-bottom:72px;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.step{
+  padding:36px 24px 36px 0;
+  border-right:1px solid rgba(255,255,255,.1);
+  transition:background .2s;
+}
+.step:last-child{border-right:none}
+.step:hover{background:rgba(255,255,255,.03)}
+.step-num{
+  font-size:2.2rem;font-weight:800;color:var(--y);
+  opacity:.35;line-height:1;margin-bottom:20px;display:block;
+}
+.step-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.step-desc{font-size:.82rem;color:var(--dim);line-height:1.65}
+.process-stats{display:flex;gap:80px}
+.pstat-n{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;color:var(--y);display:block;line-height:1}
+.pstat-l{font-size:.85rem;color:var(--dim);margin-top:6px;letter-spacing:.04em}
+
+/* ── S5 TESTIMONIALS ────────────────────────────────── */
+#testimonials{padding:var(--sec-pad);background:#0A0A0A}
+.testi-header{margin-bottom:20px}
+.testi-accent{width:60px;height:3px;background:var(--y);margin-bottom:64px}
+.testi-slider{position:relative;overflow:hidden;min-height:260px}
+.testi-slide{
+  position:absolute;inset:0;
+  opacity:0;transition:opacity .6s ease;
+  display:flex;flex-direction:column;justify-content:center;
+  pointer-events:none;
+}
+.testi-slide.active{opacity:1;position:relative;pointer-events:auto}
+.testi-quote{
+  font-size:clamp(1.2rem,2.8vw,2rem);
+  font-style:italic;color:#fff;font-weight:400;
+  line-height:1.55;margin-bottom:32px;
+  max-width:900px;
+}
+.testi-attr{
+  display:flex;align-items:center;gap:16px;
+  font-size:.95rem;font-weight:700;color:var(--dim);
+}
+.testi-attr-name{color:#fff}
+.testi-attr-stars{color:var(--y);letter-spacing:2px;font-style:normal}
+.testi-dots{display:flex;gap:10px;margin-top:48px}
+.testi-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.2);cursor:pointer;
+  transition:background .2s,transform .2s;border:none;
+}
+.testi-dot.on{background:var(--y);transform:scale(1.3)}
+
+/* ── S6 PRICING ─────────────────────────────────────── */
+#pricing{padding:var(--sec-pad);background:#060606}
+.pricing-header{margin-bottom:64px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06)}
+.price-block{
+  background:#0A0A0A;padding:48px 40px;position:relative;
+  transition:background .25s;
+}
+.price-block:hover{background:#0f0f0f}
+.price-block.feat{background:#0d0d00}
+.price-block.feat:hover{background:#111100}
+.price-badge{
+  display:inline-block;background:var(--y);color:#0A0A0A;
+  font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 14px;border-radius:50px;margin-bottom:20px;
+}
+.price-name{font-size:.78rem;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px}
+.price-num{font-size:clamp(2.5rem,4vw,3.5rem);font-weight:800;color:#fff;line-height:1;margin-bottom:4px}
+.price-per{font-size:.85rem;color:var(--dim);margin-bottom:36px}
+.price-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
+.price-feats li{display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,.7)}
+.price-feats li::before{content:'✓';color:var(--y);font-weight:800;font-size:.85rem;flex-shrink:0}
+.pricing-note{text-align:center;margin-top:40px;color:var(--dim);font-size:.9rem}
+.pricing-note strong{color:var(--y)}
+
+/* ── S7 FAQ ─────────────────────────────────────────── */
+#faq{padding:var(--sec-pad);background:#0A0A0A}
+.faq-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+.faq-left-title{
+  font-size:clamp(32px,5vw,56px);font-weight:800;
+  line-height:1.1;letter-spacing:-.03em;margin-bottom:20px;
+}
+.faq-sub{color:var(--dim);font-size:1rem;line-height:1.7;margin-bottom:36px;max-width:340px}
+.faq-list{display:flex;flex-direction:column;gap:0}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.08)}
+.faq-item:first-child{border-top:1px solid rgba(255,255,255,.08)}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:22px 0;font-weight:600;font-size:.95rem;
+  cursor:pointer;user-select:none;color:#fff;transition:color .2s;
+}
+.faq-q:hover{color:var(--y)}
+.faq-icon{
+  width:28px;height:28px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;color:var(--dim);
+  transition:all .3s;
+}
+.faq-item.open .faq-icon{border-color:var(--y);color:var(--y);transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s ease;
+  color:var(--dim);font-size:.92rem;line-height:1.75;
+}
+.faq-item.open .faq-a{max-height:160px}
+.faq-a-in{padding-bottom:22px}
+
+/* ── S8 COACH BIO ───────────────────────────────────── */
+#bio{padding:var(--sec-pad);background:#060606}
+.bio-head{text-align:center;margin-bottom:72px}
+.bio-grid{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:48px;align-items:start}
+.cred-stack{display:flex;flex-direction:column;gap:24px;padding-top:8px}
+.cred-block{padding:28px 24px;background:#0f0f0f;border-top:2px solid var(--y)}
+.cred-tag{font-size:.65rem;font-weight:800;color:var(--y);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.cred-title{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:4px}
+.cred-sub{font-size:.82rem;color:var(--dim)}
+.bio-photo{height:560px;overflow:hidden;border-radius:12px;position:relative}
+.bio-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.bio-right{padding-top:8px}
+.bio-label{font-size:.7rem;font-weight:700;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.bio-name{
+  font-size:clamp(2.5rem,4vw,3.5rem);font-weight:800;
+  color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:8px;
+}
+.bio-subtitle{font-size:.95rem;color:var(--dim);margin-bottom:24px;font-weight:500}
+.bio-text{font-size:.98rem;color:rgba(255,255,255,.7);line-height:1.85;margin-bottom:28px}
+.bio-quote{
+  font-style:italic;color:var(--y);font-size:1rem;
+  line-height:1.7;border-left:3px solid var(--y);
+  padding-left:16px;margin-bottom:32px;
+}
+
+/* ── S9 CTA ─────────────────────────────────────────── */
+#cta{position:relative;padding:var(--sec-pad);overflow:hidden;min-height:80vh;display:flex;align-items:center}
+.cta-bg{
+  position:absolute;inset:0;
+  background:url('https://images.pexels.com/photos/3836861/pexels-photo-3836861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750') center/cover no-repeat;
+  z-index:0;
+}
+.cta-ov{position:absolute;inset:0;background:rgba(0,0,0,.82);z-index:1}
+.cta-inner{position:relative;z-index:2;width:100%;max-width:680px}
+.cta-heading{
+  font-size:clamp(44px,8vw,96px);font-weight:800;
+  line-height:.95;letter-spacing:-.03em;margin-bottom:16px;
+}
+.cta-sub{color:var(--dim);font-size:1rem;margin-bottom:52px;line-height:1.7}
+.cta-form{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px}
+.f-input,.f-select,.f-area{
+  width:100%;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:14px 18px;
+  color:#fff;font-size:.95rem;outline:none;
+  transition:border-color .2s;
+}
+.f-input:focus,.f-select:focus,.f-area:focus{border-color:var(--y)}
+.f-select{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+  padding-right:40px;cursor:pointer;
+}
+.f-select option{background:#111}
+.f-area{resize:vertical;min-height:110px}
+.f-submit{
+  width:100%;padding:18px;background:var(--y);color:#0A0A0A;
+  border:none;border-radius:50px;font-size:1rem;
+  font-weight:800;letter-spacing:.04em;cursor:pointer;transition:all .2s;
+}
+.f-submit:hover{background:#fff;transform:translateY(-2px)}
+.success-msg{
+  display:none;background:rgba(232,255,0,.07);
+  border:1px solid rgba(232,255,0,.25);border-radius:12px;
+  padding:28px;text-align:center;color:var(--y);font-weight:700;
+}
+.cta-meta{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:20px}
+.cta-link{color:var(--dim);font-size:.85rem;transition:color .2s}
+.cta-link:hover{color:var(--y)}
+.cta-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.2)}
+
+/* ── FOOTER ─────────────────────────────────────────── */
+footer{
+  background:#050505;border-top:1px solid rgba(255,255,255,.06);
+  padding:36px 8vw;
+}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-copy{color:var(--dim);font-size:.8rem}
+.footer-links{display:flex;gap:28px}
+.footer-links a{color:var(--dim);font-size:.8rem;transition:color .2s}
+.footer-links a:hover{color:var(--y)}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media(max-width:1024px){
+  .bio-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .cred-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .bio-photo{grid-column:1/-1;height:420px;order:-1}
+  .bio-right{grid-column:1/-1}
+  .steps-row{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  :root{--sec-pad:80px 6vw}
+  #nav{padding:18px 6vw}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+
+  .hook-grid{grid-template-columns:1fr;gap:48px}
+  .hook-img{height:360px}
+
+  .svc-grid{grid-template-columns:1fr}
+  .svc-item:nth-child(even){border-left:none}
+
+  .steps-row{grid-template-columns:1fr 1fr}
+  .step{padding:28px 16px 28px 0}
+  .process-stats{gap:40px}
+
+  .pricing-grid{grid-template-columns:1fr;gap:1px}
+
+  .faq-grid{grid-template-columns:1fr;gap:48px}
+
+  .bio-grid{grid-template-columns:1fr}
+  .cred-stack{grid-template-columns:1fr;gap:12px}
+  .bio-photo{height:360px;order:0}
+
+  .form-row{grid-template-columns:1fr}
+
+  .footer-inner{justify-content:center;text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+  .cta-meta{flex-direction:column;gap:12px}
+  .cta-dot{display:none}
+
+  .hero-stats{gap:20px}
+  .hstat-div{height:28px}
+}
+@media(max-width:480px){
+  .steps-row{grid-template-columns:1fr}
+  .testi-quote{font-size:1.15rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ═════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-dot">T</div>
+      <span>TEEMU</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Palvelut</a></li>
+      <li><a href="#process">Prosessi</a></li>
+      <li><a href="#pricing">Hinnat</a></li>
+      <li><a href="#cta">Ota yhteyttä</a></li>
+    </ul>
+    <a href="#cta" class="btn btn-y nav-cta">Aloita nyt</a>
+    <button class="hamburger" id="ham" aria-label="Valikko">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <a href="#services"  class="ml">Palvelut</a>
+  <a href="#process"   class="ml">Prosessi</a>
+  <a href="#pricing"   class="ml">Hinnat</a>
+  <a href="#bio"       class="ml">Valmentaja</a>
+  <a href="#cta"       class="ml">Ota yhteyttä</a>
+  <a href="#cta" class="btn btn-y ml" style="margin-top:8px">Aloita nyt</a>
+</div>
+
+<!-- ══ S1 — HERO ════════════════════════════════════════ -->
+<section id="hero">
+  <video
+    autoplay muted loop playsinline
+    poster="https://images.pexels.com/videos/5319756/pexels-photo-5319756.jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+    <source src="https://videos.pexels.com/video-files/5319756/5319756-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/5319756/5319756-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.65) 100%);z-index:1;"></div>
+
+  <div class="hero-content" style="position:absolute;inset:0;z-index:2;">
+    <div class="hero-badge anim">PERSONAL TRAINER · HELSINKI</div>
+    <div class="hero-eyebrow anim d1">Harjoittele kuin urheilija.</div>
+    <h1 class="hero-name anim d2">Teemu</h1>
+    <p class="hero-sub anim d3">
+      Ammattitutkinnon suorittanut jääkiekkovalmentaja ja PT<br>
+      Suomen Urheiluopisto
+    </p>
+    <div class="hero-stats anim d3">
+      <div class="hstat">
+        <span class="hstat-n"><span class="counter" data-target="20">0</span>+</span>
+        <span class="hstat-l">vuotta kokemusta</span>
+      </div>
+      <div class="hstat-div"></div>
+      <div class="hstat">
+        <span class="hstat-n">5.0 ★</span>
+        <span class="hstat-l">arvosana</span>
+      </div>
+    </div>
+    <a href="#cta" class="btn btn-y anim d4">Varaa ilmainen tunti →</a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>VIERITÄ ALAS</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ S2 — HOOK ════════════════════════════════════════ -->
+<section id="hook">
+  <div class="hook-grid">
+    <div class="anim-left">
+      <span class="eyebrow">Miksi Teemu</span>
+      <h2 class="hook-heading">
+        Tapaa <span style="color:var(--y)">vahvempi</span><br>versio itsestäsi.
+      </h2>
+      <p class="hook-body">
+        Asiantunteva valmennus todistetuin menetelmin — todellista voimaa,
+        kestäviä tuloksia, ei turhaa. Kohtaan jokaisen yksilönä ja löydän
+        sinulle sopivimman reitin tavoitteeseesi.
+      </p>
+      <div class="hook-pills">
+        <span class="pill"><span class="counter" data-target="500">0</span>+ h valmennuksia</span>
+        <span class="pill">99% suosittelee</span>
+      </div>
+      <a href="#cta" class="btn btn-out-y">Aloita matka →</a>
+    </div>
+
+    <div class="hook-img anim-right d2">
+      <img
+        src="https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750"
+        alt="Harjoittelu kuntosalilla"
+        loading="lazy"
+      >
+    </div>
+  </div>
+</section>
+
+<!-- ══ S3 — SERVICES ════════════════════════════════════ -->
+<section id="services">
+  <div>
+    <div class="svc-header anim">
+      <span class="eyebrow">Mitä tarjoan</span>
+      <h2 class="section-title">Räätälöity sinun<br>tavoitteillesi</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-item anim">
+        <span class="svc-num">01</span>
+        <h3 class="svc-title">Yksilövalmennus</h3>
+        <p class="svc-desc">Kuntosali, painonnosto, voimanhankinta. Tekniikat turvallisesti haltuun — ohjelmat tavoitteidesi mukaan aloittelijasta edistyneeseen.</p>
+      </div>
+      <div class="svc-item anim d1">
+        <span class="svc-num">02</span>
+        <h3 class="svc-title">Jääkiekkovalmennus</h3>
+        <p class="svc-desc">Tekniikkatunnit lajin hallintaan. Ammattitutkinnon suorittanut valmentaja — luistelutekniikat, hyökkäyspeli ja pelitaktiikka.</p>
+      </div>
+      <div class="svc-item anim d2">
+        <span class="svc-num">03</span>
+        <h3 class="svc-title">Hiihtovalmennus</h3>
+        <p class="svc-desc">Opeta itsesi uuteen lajiin tai kehitä tekniikkaasi. Välineistö ja voitelu mukaan — lähdetään liikkeelle juuri sinun tasoltasi.</p>
+      </div>
+      <div class="svc-item anim d3">
+        <span class="svc-num">04</span>
+        <h3 class="svc-title">Kestävyysharjoittelu</h3>
+        <p class="svc-desc">Monipuolinen kestävyysharjoittelu tavoitteellisille kuntoilijoille — juoksu, sykevyöhykeharjoittelu ja progressiivinen kuormitus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S4 — PROCESS ═════════════════════════════════════ -->
+<section id="process">
+  <div class="process-bg"></div>
+  <div class="process-ov"></div>
+  <div class="process-inner" style="padding:0 8vw">
+    <div class="process-header anim-left">
+      <span class="eyebrow">Prosessi</span>
+      <h2 class="section-title">Miten se toimii —<br>askel askeleelta</h2>
+    </div>
+    <div class="steps-row">
+      <div class="step anim">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Ilmainen tutustumistunti</h3>
+        <p class="step-desc">Kartoitetaan tavoitteesi ja lähtötasosi ilman paineita tai sitoumuksia.</p>
+      </div>
+      <div class="step anim d1">
+        <span class="step-num">02</span>
+        <h3 class="step-title">Henkilökohtainen ohjelma</h3>
+        <p class="step-desc">Räätälöity harjoitteluohjelma juuri sinulle — tavoitteet ja arki huomioiden.</p>
+      </div>
+      <div class="step anim d2">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Ohjattu harjoittelu</h3>
+        <p class="step-desc">Tekniikka kuntoon, turvallisesti ja tehokkaasti. Opitaan yhdessä.</p>
+      </div>
+      <div class="step anim d3">
+        <span class="step-num">04</span>
+        <h3 class="step-title">Seuranta & palaute</h3>
+        <p class="step-desc">Jatkuva edistymisen seuranta ja ohjelman päivitys tulosten mukaan.</p>
+      </div>
+      <div class="step anim d4">
+        <span class="step-num">05</span>
+        <h3 class="step-title">Tulokset</h3>
+        <p class="step-desc">Näkyviä muutoksia ja uusi tapa harjoitella — kestävästi ja motivoituneesti.</p>
+      </div>
+    </div>
+    <div class="process-stats anim-scale">
+      <div>
+        <span class="pstat-n"><span class="counter" data-target="450">0</span>+</span>
+        <div class="pstat-l">ohjelmaa tehty</div>
+      </div>
+      <div>
+        <span class="pstat-n"><span class="counter" data-target="95">0</span>%</span>
+        <div class="pstat-l">asiakkaista jatkaa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S5 — TESTIMONIALS ════════════════════════════════ -->
+<section id="testimonials" style="padding:var(--sec-pad)">
+  <div class="testi-header anim-left">
+    <span class="eyebrow">Asiakastarinat</span>
+    <h2 class="section-title" style="font-size:clamp(40px,6vw,80px);margin-bottom:16px">
+      Kuule asiakkailta<br>jotka ottivat askeleen
+    </h2>
+  </div>
+  <div class="testi-accent anim-line"></div>
+
+  <div class="testi-slider anim" id="tslider">
+    <div class="testi-slide active">
+      <p class="testi-quote">"Teemu ottaa asiakkaan haasteet tosissaan ja paneutuu asiakkaan tavoitteiden saavuttamiseksi mietityllä ohjelmalla. Täsmällisyys ja joustavuus tuntien sijoittelun suhteen myös iso plussa."</p>
+      <div class="testi-attr">
+        <span class="testi-attr-name">— Minna</span>
+        <span class="testi-attr-stars">★★★★★</span>
+        <span>Yksilövalmennus</span>
+      </div>
+    </div>
+    <div class="testi-slide">
+      <p class="testi-quote">"Teemu opetti minut viime talvena hiihtämään rauhallisella ja kärsivällisellä tyylillään. Sain myös hyviä neuvoja välineistä ja suksien voiteluista."</p>
+      <div class="testi-attr">
+        <span class="testi-attr-name">— Elina</span>
+        <span class="testi-attr-stars">★★★★★</span>
+        <span>Hiihtovalmennus</span>
+      </div>
+    </div>
+    <div class="testi-slide">
+      <p class="testi-quote">"Olen ollut Teemun PT-valmennuksessa puoli vuotta. Teemu vetää minulle ja siskolleni painoharjoittelua tavoitteellisesti siten, että opimme liikeradat puhtaasti vammoja välttäen."</p>
+      <div class="testi-attr">
+        <span class="testi-attr-name">— Miia</span>
+        <span class="testi-attr-stars">★★★★★</span>
+        <span>Painoharjoittelu</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="testi-dots anim" id="tdots">
+    <button class="testi-dot on" onclick="goSlide(0)"></button>
+    <button class="testi-dot"   onclick="goSlide(1)"></button>
+    <button class="testi-dot"   onclick="goSlide(2)"></button>
+  </div>
+</section>
+
+<!-- ══ S6 — PRICING ═════════════════════════════════════ -->
+<section id="pricing">
+  <div style="padding:var(--sec-pad)">
+    <div class="pricing-header anim-left">
+      <span class="eyebrow">Investointi</span>
+      <h2 class="section-title">Valitse polkusi</h2>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="price-block anim d1">
+        <div class="price-name">Yksittäinen tunti</div>
+        <div class="price-num">45 <span style="font-size:1.4rem;font-weight:500">€</span></div>
+        <div class="price-per">per tunti</div>
+        <ul class="price-feats">
+          <li>Yksilöllinen tunti</li>
+          <li>Kaikki tasot</li>
+          <li>Joustava aikataulu</li>
+          <li>Sijainti sopimuksen mukaan</li>
+        </ul>
+        <a href="#cta" class="btn btn-out" style="width:100%;justify-content:center">Varaa tunti</a>
+      </div>
+
+      <div class="price-block feat anim d2">
+        <div class="price-badge">SUOSITUIN</div>
+        <div class="price-name">5 tunnin paketti</div>
+        <div class="price-num">225 <span style="font-size:1.4rem;font-weight:500">€</span></div>
+        <div class="price-per">45 € / tunti</div>
+        <ul class="price-feats">
+          <li>5 ohjattua tuntia</li>
+          <li>Henkilökohtainen ohjelma</li>
+          <li>Edistymisen seuranta</li>
+          <li>Säästät vs. yksittäin</li>
+        </ul>
+        <a href="#cta" class="btn btn-y" style="width:100%;justify-content:center">Aloita nyt</a>
+      </div>
+
+      <div class="price-block anim d3">
+        <div class="price-name">10 tunnin paketti</div>
+        <div class="price-num">450 <span style="font-size:1.4rem;font-weight:500">€</span></div>
+        <div class="price-per">45 € / tunti</div>
+        <ul class="price-feats">
+          <li>10 ohjattua tuntia</li>
+          <li>Täysi harjoitteluohjelma</li>
+          <li>Jatkuva palaute</li>
+          <li>1 h ilmainen aloitustunti</li>
+        </ul>
+        <a href="#cta" class="btn btn-out" style="width:100%;justify-content:center">Varaa paketti</a>
+      </div>
+
+    </div>
+    <p class="pricing-note anim">Verkkovalmennukset myös saatavilla — <strong>45 €/h</strong></p>
+  </div>
+</section>
+
+<!-- ══ S7 — FAQ ══════════════════════════════════════════ -->
+<section id="faq" style="padding:var(--sec-pad)">
+  <div class="faq-grid">
+    <div class="anim-left">
+      <span class="eyebrow">Kysymyksiä</span>
+      <h2 class="faq-left-title">Kaikki mitä sinun täytyy tietää</h2>
+      <p class="faq-sub">Onko vielä kysyttävää? Varaa ilmainen tutustumistunti — vastataan yhdessä.</p>
+      <a href="#cta" class="btn btn-out-y">Varaa tunti →</a>
+    </div>
+
+    <div class="faq-list anim-right d1">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Tarvitseeko minulla olla kokemusta salista?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-in">Ei tarvitse. Aloittelijat ovat tervetulleita — aloitetaan juuri sinun lähtötasoltasi, turvallisesti ja rauhallisesti.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Missä tunnit pidetään?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-in">Helsingissä sinun luonasi, julkisella paikalla tai verkossa. Matkustan 20 km säteellä Helsingistä.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Mikä on ilmainen aloitustunti?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-in">1 tunnin tutustumisjakso ilmaiseksi — kartoitetaan tavoitteesi, lähtötasosi ja katsotaan sopiiko yhteistyö. Ei sitoumuksia.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Voinko harjoitella verkossa?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-in">Kyllä, verkkovalmennus onnistuu myös. Hinta on sama 45€/h. Tarvitset vain videoyhteyden ja tilaa harjoitteluun.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Kuinka nopeasti näen tuloksia?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-in">Riippuu tavoitteesta ja lähtötasosta, mutta asiakkaat raportoivat ensimmäisiä muutoksia 4–8 viikossa säännöllisellä harjoittelulla.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Sopiiko valmennus loukkaantuneelle?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-in">Kyllä. Teemu on erikoistunut myös kuntoutustyyppiseen harjoitteluun ja ottaa rajoitteet aina yksilöllisesti huomioon.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S8 — COACH BIO ═══════════════════════════════════ -->
+<section id="bio">
+  <div style="padding:var(--sec-pad)">
+    <div class="bio-head anim">
+      <span class="eyebrow">Valmentajasi</span>
+      <h2 class="section-title" style="font-size:clamp(40px,6vw,80px)">Tapaa valmentajasi</h2>
+    </div>
+    <div class="bio-grid">
+
+      <div class="cred-stack anim-left">
+        <div class="cred-block">
+          <div class="cred-tag">Jääkiekko</div>
+          <div class="cred-title">Jääkiekkovalmentaja</div>
+          <div class="cred-sub">Ammattitutkinto suoritettu</div>
+        </div>
+        <div class="cred-block">
+          <div class="cred-tag">Personal Training</div>
+          <div class="cred-title">Personal Trainer</div>
+          <div class="cred-sub">Suomen Urheiluopisto</div>
+        </div>
+        <div class="cred-block">
+          <div class="cred-tag">Kokemus</div>
+          <div class="cred-title">20+ vuotta</div>
+          <div class="cred-sub">Työkokemusta</div>
+        </div>
+      </div>
+
+      <div class="bio-photo anim-scale d1">
+        <img
+          src="https://images.pexels.com/photos/36120641/pexels-photo-36120641.png?auto=compress&cs=tinysrgb&w=800&h=1120&dpr=1"
+          alt="Teemu — Personal Trainer Helsinki"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="bio-right anim-right d2">
+        <div class="bio-label">Valmentaja</div>
+        <h3 class="bio-name">Teemu</h3>
+        <div class="bio-subtitle">Jääkiekkovalmentaja & Personal Trainer · Helsinki</div>
+        <p class="bio-text">
+          Olen tehnyt valmennuksia pitkään oman työni ohella — yli 20 vuoden
+          työura toiselta alalta. Kohtaan ihmiset yksilöinä ja minulle on
+          tärkeää löytää yhdessä sinulle sopiva tavoite. Tunneilla
+          onnistumisistasi iloitaan, eikä jännitetä turhia!
+        </p>
+        <blockquote class="bio-quote">
+          "Saan valmennettavien onnistumisista ja kehittymisestä iloa itselleni!"
+        </blockquote>
+        <a href="#cta" class="btn btn-y">Varaa ilmainen tunti →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ S9 — FINAL CTA ═══════════════════════════════════ -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-ov"></div>
+  <div class="cta-inner">
+    <span class="eyebrow anim">Ota yhteyttä</span>
+    <h2 class="cta-heading anim d1">
+      VALMIS OTTAMAAN<br><span style="color:var(--y)">SEURAAVAN ASKELEEN?</span>
+    </h2>
+    <p class="cta-sub anim d2">20 minuuttia. Ei paineita. Katsotaan yhdessä mitä tavoitellaan.</p>
+
+    <form class="cta-form anim d2" id="cform" onsubmit="handleSub(event)">
+      <div class="form-row">
+        <div>
+          <label class="f-label" for="fn">Etunimi</label>
+          <input class="f-input" type="text" id="fn" placeholder="Matti" required>
+        </div>
+        <div>
+          <label class="f-label" for="em">Sähköposti</label>
+          <input class="f-input" type="email" id="em" placeholder="matti@esimerkki.fi" required>
+        </div>
+      </div>
+      <div>
+        <label class="f-label" for="ph">Puhelin <span style="color:var(--dim);font-size:.68rem">(valinnainen)</span></label>
+        <input class="f-input" type="tel" id="ph" placeholder="+358 40 123 4567">
+      </div>
+      <div>
+        <label class="f-label" for="gl">Tavoitteesi</label>
+        <select class="f-select" id="gl" required>
+          <option value="" disabled selected>Valitse tavoite…</option>
+          <option>Voimaharjoittelu</option>
+          <option>Kestävyys</option>
+          <option>Laihdutus</option>
+          <option>Jääkiekko</option>
+          <option>Hiihto</option>
+          <option>Muu</option>
+        </select>
+      </div>
+      <div>
+        <label class="f-label" for="msg">Kerro lisää tavoitteistasi</label>
+        <textarea class="f-area" id="msg" placeholder="Esim. haluan kasvattaa lihasmassaa ja opetella oikeat tekniikat…"></textarea>
+      </div>
+      <button type="submit" class="f-submit">VARAA ILMAINEN TUNTI →</button>
+    </form>
+
+    <div class="success-msg" id="smsg">
+      Kiitos yhteydenotosta! Teemu vastaa sinulle pian.
+    </div>
+
+    <div class="cta-meta anim d3">
+      <a href="tel:+358401234567" class="cta-link">+358 XX XXX XXXX</a>
+      <div class="cta-dot"></div>
+      <a href="https://www.superprof.fi" target="_blank" rel="noopener" class="cta-link">Superprof-profiili</a>
+      <div class="cta-dot"></div>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="cta-link">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 Teemu — Personal Trainer Helsinki</span>
+    <nav class="footer-links">
+      <a href="https://www.superprof.fi" target="_blank" rel="noopener">Superprof</a>
+      <a href="https://instagram.com"    target="_blank" rel="noopener">Instagram</a>
+      <a href="#cta">Ota yhteyttä</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ══ JAVASCRIPT ════════════════════════════════════════ -->
+<script>
+/* ── Nav scroll ── */
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  if(scrollY>80){
+    navEl.style.background='rgba(10,10,10,0.9)';
+    navEl.style.backdropFilter='blur(20px)';
+    navEl.style.webkitBackdropFilter='blur(20px)';
+    navEl.style.padding='16px 8vw';
+    navEl.style.borderBottom='1px solid rgba(255,255,255,0.06)';
+  }else{
+    navEl.style.background='transparent';
+    navEl.style.backdropFilter='none';
+    navEl.style.webkitBackdropFilter='none';
+    navEl.style.padding='24px 8vw';
+    navEl.style.borderBottom='none';
+  }
+},{passive:true});
+
+/* ── Hamburger ── */
+const ham=document.getElementById('ham');
+const mob=document.getElementById('mob');
+ham.addEventListener('click',()=>{
+  const open=mob.classList.toggle('open');
+  ham.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+});
+document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{
+  mob.classList.remove('open');ham.classList.remove('open');
+  document.body.style.overflow='';
+}));
+
+/* ── Hero video parallax ── */
+const heroVid=document.querySelector('#hero video');
+window.addEventListener('scroll',()=>{
+  if(scrollY<window.innerHeight){
+    heroVid.style.transform=`translateY(${scrollY*.4}px)`;
+  }
+},{passive:true});
+
+/* ── Scroll animations ── */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.1});
+document.querySelectorAll('.anim,.anim-left,.anim-right,.anim-scale,.anim-line').forEach(el=>observer.observe(el));
+
+/* ── Counter animation ── */
+function countUp(el,end,dur=2000){
+  const start=performance.now();
+  (function tick(now){
+    const p=Math.min((now-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(ease*end);
+    if(p<1)requestAnimationFrame(tick);
+  })(performance.now());
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      countUp(e.target,parseInt(e.target.dataset.target,10));
+      cObs.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>cObs.observe(el));
+
+/* ── Testimonials slider ── */
+let cur=0;
+const slides=document.querySelectorAll('.testi-slide');
+const dots=document.querySelectorAll('.testi-dot');
+function goSlide(n){
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('on');
+  cur=n;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('on');
+}
+let timer=setInterval(()=>goSlide((cur+1)%slides.length),5000);
+document.querySelectorAll('.testi-dot').forEach((d,i)=>{
+  d.addEventListener('click',()=>{clearInterval(timer);goSlide(i);timer=setInterval(()=>goSlide((cur+1)%slides.length),5000);});
+});
+
+/* ── FAQ accordion ── */
+function toggleFaq(q){
+  const item=q.closest('.faq-item');
+  const open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+/* ── Form submit ── */
+function handleSub(e){
+  e.preventDefault();
+  const fn=document.getElementById('fn').value;
+  const em=document.getElementById('em').value;
+  const ph=document.getElementById('ph').value;
+  const gl=document.getElementById('gl').value;
+  const ms=document.getElementById('msg').value;
+  const sub=encodeURIComponent('Varaus — ilmainen tutustumistunti');
+  const bod=encodeURIComponent(`Nimi: ${fn}\nSähköposti: ${em}\nPuhelin: ${ph}\nTavoite: ${gl}\n\n${ms}`);
+  window.location.href=`mailto:teemu@email.fi?subject=${sub}&body=${bod}`;
+  document.getElementById('cform').style.display='none';
+  document.getElementById('smsg').style.display='block';
+}
+</script>
+</body>
+</html>
