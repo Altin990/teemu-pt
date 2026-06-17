@@ -541,7 +541,6 @@ footer{
     autoplay muted loop playsinline
     poster="https://images.pexels.com/videos/5319756/pexels-photo-5319756.jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200"
     style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-    <source src="https://videos.pexels.com/video-files/5319756/5319756-uhd_2560_1440_25fps.mp4" type="video/mp4">
     <source src="https://videos.pexels.com/video-files/5319756/5319756-hd_1920_1080_25fps.mp4" type="video/mp4">
   </video>
   <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.65) 100%);z-index:1;"></div>
@@ -1072,15 +1071,6 @@ function handleSub(e){
   document.getElementById('smsg').style.display='block';
 }
 
-/* ── Video autoplay fallback ── */
-document.addEventListener('DOMContentLoaded',()=>{
-  const video=document.querySelector('video');
-  if(video){
-    video.play().catch(()=>{
-      video.style.display='none';
-    });
-  }
-});
 </script>
 </body>
 </html>
