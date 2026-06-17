@@ -282,7 +282,13 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
 .pstat-l{font-size:.85rem;color:var(--dim);margin-top:6px;letter-spacing:.04em}
 
 /* ── S5 TESTIMONIALS ────────────────────────────────── */
-#testimonials{padding:var(--sec-pad);background:#0A0A0A}
+#testimonials{padding:var(--sec-pad);position:relative;overflow:hidden;isolation:isolate}
+#testimonials::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.88);z-index:0}
+#testimonials>*{position:relative;z-index:1}
+#testimonials>.parallax-bg{
+  position:absolute;inset:0;z-index:-1;will-change:transform;
+  background:url("https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1") center/cover no-repeat;
+}
 .testi-header{margin-bottom:20px}
 .testi-accent{width:60px;height:3px;background:var(--y);margin-bottom:64px}
 .testi-slider{position:relative;overflow:hidden;min-height:260px}
@@ -497,6 +503,7 @@ footer{
 
   .hero-stats{gap:20px}
   .hstat-div{height:28px}
+  .parallax-bg{transform:none !important}
 }
 @media(max-width:480px){
   .steps-row{grid-template-columns:1fr}
@@ -688,7 +695,8 @@ footer{
 </section>
 
 <!-- ══ S5 — TESTIMONIALS ════════════════════════════════ -->
-<section id="testimonials" style="padding:var(--sec-pad)">
+<section id="testimonials">
+  <div class="parallax-bg"></div>
   <div class="testi-header anim-left">
     <span class="eyebrow">Asiakastarinat</span>
     <h2 class="section-title" style="font-size:clamp(40px,6vw,80px);margin-bottom:16px">
@@ -1008,6 +1016,22 @@ window.addEventListener('scroll',()=>{
     heroVid.style.transform=`translateY(${scrollY*.4}px)`;
   }
 },{passive:true});
+
+/* ── Section background parallax ── */
+const parallaxBgs=document.querySelectorAll('.parallax-bg');
+function updateParallax(){
+  if(window.innerWidth<=768)return;
+  parallaxBgs.forEach(el=>{
+    const section=el.closest('section');
+    if(!section)return;
+    const rect=section.getBoundingClientRect();
+    if(rect.top<window.innerHeight&&rect.bottom>0){
+      const progress=(window.innerHeight-rect.top)/(window.innerHeight+rect.height);
+      el.style.transform=`translateY(${(progress-.5)*60}px)`;
+    }
+  });
+}
+window.addEventListener('scroll',updateParallax,{passive:true});
 
 /* ── Scroll animations ── */
 const observer=new IntersectionObserver(entries=>{
