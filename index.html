@@ -121,7 +121,7 @@ video::-webkit-media-controls-enclosure{display:none !important}
 video::-webkit-media-controls-panel{display:none !important}
 video::-webkit-media-controls-play-button{display:none !important}
 video::-webkit-media-controls-start-playback-button{display:none !important}
-video{-webkit-appearance:none}
+video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-select:none}
 .hero-content{
   position:absolute;inset:0;z-index:2;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -537,15 +537,18 @@ footer{
 
 <!-- ══ S1 — HERO ════════════════════════════════════════ -->
 <section id="hero">
-  <video
-    autoplay muted loop playsinline
-    poster="https://images.pexels.com/videos/5319756/pexels-photo-5319756.jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200"
-    style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-    <source src="https://videos.pexels.com/video-files/5319756/5319756-hd_1920_1080_25fps.mp4" type="video/mp4">
-  </video>
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.65) 100%);z-index:1;"></div>
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
+    <video
+      autoplay muted loop playsinline
+      poster="https://images.pexels.com/videos/5319756/pexels-photo-5319756.jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200"
+      style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+      <source src="https://videos.pexels.com/video-files/5319756/5319756-hd_1920_1080_25fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.65) 100%);z-index:1;pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;z-index:2;pointer-events:auto;background:transparent;"></div>
 
-  <div class="hero-content" style="position:absolute;inset:0;z-index:2;">
+  <div class="hero-content" style="position:absolute;inset:0;z-index:3;pointer-events:auto;">
     <div class="hero-badge anim">PERSONAL TRAINER · HELSINKI</div>
     <div class="hero-eyebrow anim d1">Harjoittele kuin urheilija.</div>
     <h1 class="hero-name anim d2">Teemu</h1>
