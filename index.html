@@ -64,8 +64,6 @@ input,textarea,select,button{font-family:inherit}
 .btn-out:hover{border-color:var(--y);color:var(--y);transform:translateY(-2px)}
 .btn-out-y{background:transparent;color:var(--y);border:1.5px solid var(--y)}
 .btn-out-y:hover{background:var(--y);color:#0A0A0A;transform:translateY(-2px)}
-.btn-dark{background:#0D0D0D;color:#fff;border:1px solid rgba(0,0,0,0.15)}
-.btn-dark:hover{background:#2a2a2a;transform:translateY(-2px)}
 
 /* ── EYEBROW ────────────────────────────────────────── */
 .eyebrow{
@@ -73,12 +71,10 @@ input,textarea,select,button{font-family:inherit}
   font-size:.72rem;font-weight:700;letter-spacing:.22em;
   text-transform:uppercase;margin-bottom:1.2rem;
 }
-#cta .eyebrow{color:rgba(255,255,255,0.35)}
-#bio .eyebrow{color:#888}
 
 /* ── SECTION HEADINGS ───────────────────────────────── */
 .section-title{
-  font-size:clamp(56px,9vw,120px);
+  font-size:clamp(48px,8vw,100px);
   font-weight:800;line-height:1;
   letter-spacing:-.03em;margin-bottom:0;
 }
@@ -98,21 +94,8 @@ input,textarea,select,button{font-family:inherit}
   font-weight:800;font-size:.95rem;flex-shrink:0;
 }
 .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
-.nav-links a{
-  position:relative;
-  color:var(--dim);font-size:.88rem;font-weight:500;transition:color .2s;
-}
-.nav-links a::after{
-  content:'';
-  position:absolute;
-  bottom:-4px;left:0;
-  width:100%;height:2px;
-  background:var(--y);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .3s ease;
-}
-.nav-links a:hover::after{transform:scaleX(1)}
+.nav-links a{color:var(--dim);font-size:.88rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
 #nav .btn{padding:12px 24px;font-size:.85rem}
 
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
@@ -153,17 +136,17 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
   backdrop-filter:blur(6px);background:rgba(255,255,255,.05);
 }
 .hero-eyebrow{
-  color:rgba(255,255,255,0.75);font-size:clamp(.85rem,1.5vw,1.1rem);
+  color:var(--y);font-size:clamp(.85rem,1.5vw,1.1rem);
   font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   margin-bottom:12px;
 }
 .hero-name{
-  font-size:clamp(90px,16vw,200px);font-weight:800;
+  font-size:clamp(80px,15vw,180px);font-weight:800;
   line-height:.92;color:#fff;letter-spacing:-.04em;
   margin-bottom:20px;
 }
 .hero-sub{
-  color:rgba(255,255,255,0.7);font-style:italic;font-size:clamp(.85rem,1.4vw,1rem);
+  color:var(--y);font-size:clamp(.85rem,1.4vw,1rem);
   font-weight:600;margin-bottom:32px;opacity:.9;max-width:500px;
   line-height:1.6;
 }
@@ -202,15 +185,15 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
   gap:80px;align-items:center;
 }
 .hook-heading{
-  font-size:clamp(40px,6vw,72px);font-weight:800;
+  font-size:clamp(36px,5vw,64px);font-weight:800;
   line-height:1.1;letter-spacing:-.03em;margin-bottom:28px;
 }
 .hook-body{color:var(--dim);font-size:1.05rem;line-height:1.85;margin-bottom:32px;max-width:480px}
 .hook-pills{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
 .pill{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.2);
-  color:rgba(255,255,255,.6);
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.7);
   font-size:.78rem;font-weight:600;
   padding:8px 20px;border-radius:50px;letter-spacing:.04em;
 }
@@ -226,8 +209,10 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
 /* ── S3 SERVICES ────────────────────────────────────── */
 #services{
   position:relative;
-  overflow:hidden;
-  isolation:isolate;
+  background-image:url("https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
 }
 #services::before{
   content:"";
@@ -237,18 +222,11 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
   z-index:0;
 }
 #services>div{position:relative;z-index:1;padding:var(--sec-pad)}
-.svc-bg{
-  position:absolute;inset:0;
-  background:url("https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1") center/cover no-repeat;
-  z-index:-1;
-}
-.parallax-bg{will-change:transform}
 .svc-header{margin-bottom:64px}
 .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
-.svc-rule{height:2px;background:var(--y);margin-bottom:0}
 .svc-item{
   padding:48px 40px;
-  border-top:none;
+  border-top:2px solid var(--y);
   transition:background .25s;
 }
 .svc-item:nth-child(even){border-left:1px solid rgba(255,255,255,.06)}
@@ -262,7 +240,7 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
   color:#fff;margin-bottom:12px;
   transition:color .2s;letter-spacing:-.02em;
 }
-.svc-item:hover .svc-title{color:#fff;opacity:1}
+.svc-item:hover .svc-title{color:var(--y)}
 .svc-desc{color:var(--dim);font-size:.95rem;line-height:1.75;max-width:380px}
 
 /* ── S4 PROCESS ─────────────────────────────────────── */
@@ -295,12 +273,12 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
 .step:hover{background:rgba(255,255,255,.03)}
 .step-num{
   font-size:2.2rem;font-weight:800;color:var(--y);
-  opacity:.15;line-height:1;margin-bottom:20px;display:block;
+  opacity:.35;line-height:1;margin-bottom:20px;display:block;
 }
 .step-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
 .step-desc{font-size:.82rem;color:var(--dim);line-height:1.65}
 .process-stats{display:flex;gap:80px}
-.pstat-n{font-size:clamp(3rem,6vw,5rem);font-weight:800;color:#fff;display:block;line-height:1}
+.pstat-n{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;color:var(--y);display:block;line-height:1}
 .pstat-l{font-size:.85rem;color:var(--dim);margin-top:6px;letter-spacing:.04em}
 
 /* ── S5 TESTIMONIALS ────────────────────────────────── */
@@ -316,7 +294,7 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
 }
 .testi-slide.active{opacity:1;position:relative;pointer-events:auto}
 .testi-quote{
-  font-size:clamp(1.4rem,3vw,2.2rem);
+  font-size:clamp(1.2rem,2.8vw,2rem);
   font-style:italic;color:#fff;font-weight:400;
   line-height:1.55;margin-bottom:32px;
   max-width:900px;
@@ -326,7 +304,7 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
   font-size:.95rem;font-weight:700;color:var(--dim);
 }
 .testi-attr-name{color:#fff}
-.testi-attr-stars{color:rgba(255,255,255,0.45);letter-spacing:2px;font-style:normal}
+.testi-attr-stars{color:var(--y);letter-spacing:2px;font-style:normal}
 .testi-dots{display:flex;gap:10px;margin-top:48px}
 .testi-dot{
   width:8px;height:8px;border-radius:50%;
@@ -343,9 +321,9 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
   background:#0A0A0A;padding:48px 40px;position:relative;
   transition:background .25s;
 }
-.price-block:hover{background:#0f0f0f;transform:translateY(-6px)}
-.price-block.feat{background:#111;border-top:3px solid rgba(255,255,255,0.18)}
-.price-block.feat:hover{background:#161616}
+.price-block:hover{background:#0f0f0f}
+.price-block.feat{background:#0d0d00}
+.price-block.feat:hover{background:#111100}
 .price-badge{
   display:inline-block;background:var(--y);color:#0A0A0A;
   font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
@@ -356,7 +334,7 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
 .price-per{font-size:.85rem;color:var(--dim);margin-bottom:36px}
 .price-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
 .price-feats li{display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,.7)}
-.price-feats li::before{content:'✓';color:rgba(255,255,255,0.75);font-weight:800;font-size:.85rem;flex-shrink:0}
+.price-feats li::before{content:'✓';color:var(--y);font-weight:800;font-size:.85rem;flex-shrink:0}
 .pricing-note{text-align:center;margin-top:40px;color:var(--dim);font-size:.9rem}
 .pricing-note strong{color:var(--y)}
 
@@ -394,27 +372,26 @@ video{-webkit-appearance:none;pointer-events:none;-webkit-user-select:none;user-
 .faq-a-in{padding-bottom:22px}
 
 /* ── S8 COACH BIO ───────────────────────────────────── */
-#bio{padding:var(--sec-pad);background:#F2EFE9;color:#0D0D0D}
+#bio{padding:var(--sec-pad);background:#060606}
 .bio-head{text-align:center;margin-bottom:72px}
 .bio-grid{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:48px;align-items:start}
 .cred-stack{display:flex;flex-direction:column;gap:24px;padding-top:8px}
-.cred-block{padding:28px 24px;background:#1a1a1a;border-top:2px solid rgba(255,255,255,0.06)}
-.cred-tag{font-size:.65rem;font-weight:800;color:rgba(255,255,255,0.45);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.cred-block{padding:28px 24px;background:#0f0f0f;border-top:2px solid var(--y)}
+.cred-tag{font-size:.65rem;font-weight:800;color:var(--y);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
 .cred-title{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:4px}
-.cred-sub{font-size:.82rem;color:rgba(255,255,255,0.45)}
-.bio-photo{height:560px;overflow:hidden;border-radius:12px;position:relative;box-shadow:0 40px 80px rgba(0,0,0,0.12)}
-.bio-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s ease}
-.bio-photo:hover img{transform:scale(1.02)}
+.cred-sub{font-size:.82rem;color:var(--dim)}
+.bio-photo{height:560px;overflow:hidden;border-radius:12px;position:relative}
+.bio-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 .bio-right{padding-top:8px}
-.bio-label{font-size:.7rem;font-weight:700;color:#888;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.bio-label{font-size:.7rem;font-weight:700;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
 .bio-name{
   font-size:clamp(2.5rem,4vw,3.5rem);font-weight:800;
-  color:#0D0D0D;letter-spacing:-.03em;line-height:1;margin-bottom:8px;
+  color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:8px;
 }
-.bio-subtitle{font-size:.95rem;color:#666;margin-bottom:24px;font-weight:500}
-.bio-text{font-size:.98rem;color:#333;line-height:1.85;margin-bottom:28px}
+.bio-subtitle{font-size:.95rem;color:var(--dim);margin-bottom:24px;font-weight:500}
+.bio-text{font-size:.98rem;color:rgba(255,255,255,.7);line-height:1.85;margin-bottom:28px}
 .bio-quote{
-  font-style:italic;color:#444;font-size:1rem;
+  font-style:italic;color:var(--y);font-size:1rem;
   line-height:1.7;border-left:3px solid var(--y);
   padding-left:16px;margin-bottom:32px;
 }
@@ -520,7 +497,6 @@ footer{
 
   .hero-stats{gap:20px}
   .hstat-div{height:28px}
-  .parallax-bg{transform:none !important}
 }
 @media(max-width:480px){
   .steps-row{grid-template-columns:1fr}
@@ -591,7 +567,7 @@ footer{
         <span class="hstat-l">arvosana</span>
       </div>
     </div>
-    <a href="#cta" class="btn btn-out anim d4">Varaa ilmainen tunti →</a>
+    <a href="#cta" class="btn btn-y anim d4">Varaa ilmainen tunti →</a>
   </div>
 
   <div class="scroll-hint">
@@ -606,7 +582,7 @@ footer{
     <div class="anim-left">
       <span class="eyebrow">Miksi Teemu</span>
       <h2 class="hook-heading">
-        Tapaa vahvempi<br>versio itsestäsi.
+        Tapaa <span style="color:var(--y)">vahvempi</span><br>versio itsestäsi.
       </h2>
       <p class="hook-body">
         Asiantunteva valmennus todistetuin menetelmin — todellista voimaa,
@@ -617,7 +593,7 @@ footer{
         <span class="pill"><span class="counter" data-target="500">0</span>+ h valmennuksia</span>
         <span class="pill">99% suosittelee</span>
       </div>
-      <a href="#cta" class="btn btn-out">Aloita matka →</a>
+      <a href="#cta" class="btn btn-out-y">Aloita matka →</a>
     </div>
 
     <div class="hook-img anim-right d2">
@@ -632,13 +608,11 @@ footer{
 
 <!-- ══ S3 — SERVICES ════════════════════════════════════ -->
 <section id="services">
-  <div class="svc-bg parallax-bg"></div>
   <div>
     <div class="svc-header anim">
       <span class="eyebrow">Mitä tarjoan</span>
       <h2 class="section-title">Räätälöity sinun<br>tavoitteillesi</h2>
     </div>
-    <div class="svc-rule anim"></div>
     <div class="svc-grid">
       <div class="svc-item anim">
         <span class="svc-num">01</span>
@@ -666,7 +640,7 @@ footer{
 
 <!-- ══ S4 — PROCESS ═════════════════════════════════════ -->
 <section id="process">
-  <div class="process-bg parallax-bg"></div>
+  <div class="process-bg"></div>
   <div class="process-ov"></div>
   <div class="process-inner" style="padding:0 8vw">
     <div class="process-header anim-left">
@@ -815,6 +789,7 @@ footer{
 <section id="faq" style="padding:var(--sec-pad)">
   <div class="faq-grid">
     <div class="anim-left">
+      <span class="eyebrow">Kysymyksiä</span>
       <h2 class="faq-left-title">Kaikki mitä sinun täytyy tietää</h2>
       <p class="faq-sub">Onko vielä kysyttävää? Varaa ilmainen tutustumistunti — vastataan yhdessä.</p>
       <a href="#cta" class="btn btn-out-y">Varaa tunti →</a>
@@ -915,7 +890,7 @@ footer{
         <blockquote class="bio-quote">
           "Saan valmennettavien onnistumisista ja kehittymisestä iloa itselleni!"
         </blockquote>
-        <a href="#cta" class="btn btn-dark">Varaa ilmainen tunti →</a>
+        <a href="#cta" class="btn btn-y">Varaa ilmainen tunti →</a>
       </div>
 
     </div>
@@ -924,7 +899,7 @@ footer{
 
 <!-- ══ S9 — FINAL CTA ═══════════════════════════════════ -->
 <section id="cta">
-  <div class="cta-bg parallax-bg"></div>
+  <div class="cta-bg"></div>
   <div class="cta-ov"></div>
   <div class="cta-inner">
     <span class="eyebrow anim">Ota yhteyttä</span>
@@ -1033,22 +1008,6 @@ window.addEventListener('scroll',()=>{
     heroVid.style.transform=`translateY(${scrollY*.4}px)`;
   }
 },{passive:true});
-
-/* ── Section background parallax ── */
-const parallaxBgs=document.querySelectorAll('.parallax-bg');
-function updateParallax(){
-  if(window.innerWidth<=768)return;
-  parallaxBgs.forEach(el=>{
-    const section=el.closest('section');
-    if(!section)return;
-    const rect=section.getBoundingClientRect();
-    if(rect.top<window.innerHeight&&rect.bottom>0){
-      const progress=(window.innerHeight-rect.top)/(window.innerHeight+rect.height);
-      el.style.transform=`translateY(${(progress-.5)*60}px)`;
-    }
-  });
-}
-window.addEventListener('scroll',updateParallax,{passive:true});
 
 /* ── Scroll animations ── */
 const observer=new IntersectionObserver(entries=>{
