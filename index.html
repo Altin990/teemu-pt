@@ -116,6 +116,12 @@ input,textarea,select,button{font-family:inherit}
 /* ── S1 HERO ────────────────────────────────────────── */
 #hero{position:relative;height:100vh;min-height:600px;overflow:hidden}
 #hero video{will-change:transform}
+video::-webkit-media-controls{display:none !important}
+video::-webkit-media-controls-enclosure{display:none !important}
+video::-webkit-media-controls-panel{display:none !important}
+video::-webkit-media-controls-play-button{display:none !important}
+video::-webkit-media-controls-start-playback-button{display:none !important}
+video{-webkit-appearance:none}
 .hero-content{
   position:absolute;inset:0;z-index:2;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -1065,6 +1071,16 @@ function handleSub(e){
   document.getElementById('cform').style.display='none';
   document.getElementById('smsg').style.display='block';
 }
+
+/* ── Video autoplay fallback ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  const video=document.querySelector('video');
+  if(video){
+    video.play().catch(()=>{
+      video.style.display='none';
+    });
+  }
+});
 </script>
 </body>
 </html>
